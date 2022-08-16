@@ -8,6 +8,8 @@ try:
     os.remove("script2.py")
 except:
     pass
+
+
 try:
     query_file = open("query.txt","r")
     queries = query_file.readlines()
@@ -80,17 +82,19 @@ for query in queries:
                 answer = answer[:-11]
 
             if "www.youtube.com" in answer or "https://youtu.be" in answer:
-                
                 try:
                     r = requests.get(f"https://www.youtube.com/oembed?url={answer}&format=json")
-		    answer = r.json()['html']
-                except Exception as e:
+		            answer = r.json()['html']
+                
+                except Exception:
                     pass
-            try:
-                answer = answer.replace(paa.get_answer(i)['displayed_link'],'')
-            except KeyError:
-                pass
-        except Exception as e:
+
+                try:
+                    answer = answer.replace(paa.get_answer(i)['displayed_link'],'')
+                except KeyError:
+                    pass
+
+        except Exception:
             answer = ""
             print(f"Exception:{e}")
         if answer == "" and first == False:
