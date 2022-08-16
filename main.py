@@ -106,9 +106,9 @@ for query in queries:
                         pass
 
             except Exception as e:
-
                 answer = ""
                 print(f"Exception:{e}")
+
             if answer == "" and first == False:
                 print("Skipping:\n\t No answer found")
                 continue
