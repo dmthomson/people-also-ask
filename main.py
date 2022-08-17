@@ -32,7 +32,8 @@ def get_queries_from_file(query_file: str) -> list:
 print("Made it passed this point")
 
 
-def search_queries(queries: list):
+def search_queries(queries: list) -> None:
+    print(queries)
     for query in queries:
         with open("result.csv", "a", encoding="utf_8") as res_file:
             try:
@@ -57,17 +58,17 @@ def search_queries(queries: list):
 
                 temp_query.close()
 
-                script2 = open("script2.py", "w")
+                with open("script2.py", "w") as script2:
 
-                script2.writelines(
-                    [
-                        "from subprocess import Popen\n",
-                        "import time\n",
-                        "time.sleep(2)\n",
-                        "Popen('python script.py')\n",
-                        "exit(0)",
-                    ]
-                )
+                    script2.writelines(
+                        [
+                            "from subprocess import Popen\n",
+                            "import time\n",
+                            "time.sleep(2)\n",
+                            "Popen('python main.py')\n",
+                            "exit(0)",
+                        ]
+                    )
 
                 Popen("python script2.py")
 
